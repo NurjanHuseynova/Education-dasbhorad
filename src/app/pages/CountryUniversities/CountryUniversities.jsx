@@ -4,7 +4,7 @@ import BgCard from "../../components/BgCard";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import FilterComponent from "../../components/FilterComponent";
 import {
-   setCountryUniList,
+  setCountryUniList,
   setDeleteToggle,
   setSelectedName,
   setFilters,
@@ -13,6 +13,7 @@ import axios from "axios";
 import trash from "../../../assets/img/trash.svg";
 import Sidebar from "../Sidebar/Sidebar";
 import ProContainer from "../../components/ProContainer";
+import { PulseLoader } from "react-spinners";
 
 function CountryUniversities() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function CountryUniversities() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [nameFilter, setNameFilter] = useState("");
+  const [loading, setLoading] = useState(false); // Centralized loading state
 
   useEffect(() => {
     getCountries();
@@ -36,19 +38,23 @@ function CountryUniversities() {
 
   const getCountries = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("https://restcountries.com/v3.1/all");
       const countryOptions = response.data.map((country) => ({
         value: country.name.common,
         label: country.name.common,
       }));
       setCountries(countryOptions);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log("getCountries error: ", error);
     }
   };
 
   const getUniversityList = async () => {
     try {
+      setLoading(true);
       let url = `http://universities.hipolabs.com/search?`;
 
       if (selectedCountry) {
@@ -61,7 +67,9 @@ function CountryUniversities() {
 
       const response = await axios.get(url);
       dispatch(setCountryUniList(response.data));
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log("getUniversityList error: ", error);
     }
   };
@@ -100,8 +108,9 @@ function CountryUniversities() {
   };
 
   const handleClearFilters = () => {
+    setNameFilter("");
+    setSelectedCountry("");
     dispatch(setCountryUniList([]));
-  
   };
 
   useEffect(() => {
@@ -125,7 +134,11 @@ function CountryUniversities() {
             <BgCard>
               <div className="w-full">
                 <div className="bg-white shadow-md rounded">
-                  {countryUniList.length === 0 ? (
+                  {!loading ? (
+                    <div className="flex justify-center items-center">
+                      <PulseLoader color="#36d7b7" />
+                    </div>
+                  ) : countryUniList.length === 0 ? (
                     <div className="text-center py-10">No data found</div>
                   ) : (
                     <table className="min-w-max w-full table-auto">
