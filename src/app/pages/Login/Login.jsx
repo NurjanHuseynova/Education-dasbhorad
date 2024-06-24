@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import "../../pages/Login/login.css";
-import study from "../../../assets/img/study.png";
+import loginImg from "../../../assets/img/loginImg.png";
+import { Button } from "reactstrap";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -20,13 +20,12 @@ function Login() {
       };
 
       if (!username || !password) {
-        toast.error("Username and Password are required field");
-        return
+        toast.error("Username and Password are required fields");
+        return;
       }
 
       if (username === userInfo.username && password === userInfo.password) {
         localStorage.setItem("user", JSON.stringify(userInfo));
-
         navigate("/home");
       } else {
         toast.error("Username and Password are incorrect");
@@ -37,58 +36,55 @@ function Login() {
   };
 
   return (
-    <section className="loginBack">
-      <div className="flex flex-row items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div>{/* <img src={study} width={300}/> */}</div>
-        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-center">
-              {/* <img src={palmali} alt="Palmali Logo" /> */}
-              Welcome!
-            </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder=""
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder=""
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full mt-5 !bg-[#025e3d] text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+    <section className="loginBack flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white rounded-lg shadow-lg flex flex-col lg:flex-row w-[60%] min-h-[500px]">
+        <div className="flex items-center justify-center p-6 lg:p-8 bg-primary-600 rounded-t-lg lg:rounded-t-none lg:rounded-l-lg ">
+          <img src={loginImg} alt="Login" className="w-full max-w-sm lg:max-w-md" />
+        </div>
+        <div className="p-8 lg:p-12 flex flex-col justify-center w-[50%]">
+          <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">Welcome!</h1>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Sign in
-              </button>
-            </form>
-          </div>
+                Username
+              </label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Username"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Password"
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full py-2 !bg-[#103250] text-white rounded-lg   "
+            >
+              Sign in
+            </Button>
+          </form>
         </div>
       </div>
     </section>

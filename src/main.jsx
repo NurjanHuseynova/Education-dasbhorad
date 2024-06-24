@@ -6,7 +6,6 @@ import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
 import store from ".././src/app/store/store.js"
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
