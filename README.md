@@ -4,6 +4,8 @@
 !! username : Nurjan 
 !! password : Nurjan123
 
+!!!! modullar uchun istediyiniz formatda fake api olmadigi uchun , COUNTRY UNIVERSITIES elave olaraq yazdim
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

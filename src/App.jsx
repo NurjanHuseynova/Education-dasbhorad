@@ -6,6 +6,7 @@ import Home from './app/pages/Home/Home';
 import Universities from './app/pages/Universities/Universities';
 import Schools from './app/pages/Schools/Schools';
 import HighSchools from './app/pages/HighSchools/HighSchools';
+import CountryUniversities from './app/pages/CountryUniversities/CountryUniversities';
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
             <Route path="/universities" element={<Universities />} />
             <Route path="/schools" element={<Schools />} />
             <Route path="/highSchools" element={<HighSchools />} />
+            <Route path="/countryUniversities" element={<CountryUniversities />} />
+
 
           </Routes>
     </Router>

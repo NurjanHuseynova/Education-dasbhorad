@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { FaHome, FaUniversity, FaSchool, FaUserGraduate, FaSignOutAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  FaHome,
+  FaUniversity,
+  FaSchool,
+  FaUserGraduate,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import graduation from "../../../assets/img/graduation.png";
 
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUsername = JSON.parse(localStorage.getItem('user'));
+    const storedUsername = JSON.parse(localStorage.getItem("user"));
     if (storedUsername.username) {
       setUsername(storedUsername.username);
     }
@@ -25,14 +31,14 @@ function Sidebar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/');
+    navigate("/");
   };
 
-  const navLinkClasses = ({ isActive }) => 
+  const navLinkClasses = ({ isActive }) =>
     `flex items-center p-2 rounded-lg group ${
       isActive
-        ? 'bg-gray-700 text-white dark:bg-gray-700 dark:text-white'
-        : 'text-gray-900 dark:text-white hover:bg-gray-700 hover:text-white dark:hover:bg-gray-700'
+        ? "bg-gray-700 text-white dark:bg-gray-700 dark:text-white"
+        : "text-gray-900 dark:text-white hover:bg-gray-700 hover:text-white dark:hover:bg-gray-700"
     }`;
 
   return (
@@ -64,13 +70,13 @@ function Sidebar() {
       <aside
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform transform bg-gray-50 dark:bg-gray-800 ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto">
           <div className="flex items-center mb-5 gap-3">
-            <img src={graduation} width={50} alt="Graduation"/>
+            <img src={graduation} width={50} alt="Graduation" />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               {username}
             </span>
@@ -116,7 +122,17 @@ function Sidebar() {
                 <span className="ms-3">High Schools</span>
               </NavLink>
             </li>
-         
+            <li>
+              <NavLink
+                to="/countryUniversities"
+                className={navLinkClasses}
+                onClick={closeSidebar}
+              >
+                <FaUniversity className="w-5 h-5" />
+
+                <span className="ms-3">Country Universities</span>
+              </NavLink>
+            </li>
           </ul>
           <button
             onClick={handleLogout}
