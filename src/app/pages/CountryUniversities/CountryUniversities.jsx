@@ -134,7 +134,7 @@ function CountryUniversities() {
             <BgCard>
               <div className="w-full">
                 <div className="bg-white shadow-md rounded">
-                  {!loading ? (
+                  {loading ? (
                     <div className="flex justify-center items-center">
                       <PulseLoader color="#36d7b7" />
                     </div>
